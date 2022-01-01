@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://bootswatch.com/5/cyborg/bootstrap.min.css">
+    </head>
+    <Center><body>
+        <h1><p>validar Color CMYK con expresiones regulares</p></h1>
+        <p>Para que un color sea valido tiene que poner las letras CMYK y alado de ellas un número,ejemplo: C0M1Y2K3</p>
+        <p>Se puede poner un espacio antes de introducir la siguiente letra, ejemplo: C1 M1K1 Y1234 K1</p>
+        <p>el número maximo a introducir a un lado de cada letra es de 4 digitos</p>
+        <p> </p>
+        <form action="javascript:codigo()">
+            <label>Ingrese un color en CMYK</label>
+            <input type="text" id="codCMYK" >
+            <input type="submit"  value = "ENVIAR"> <!-- onclick="codigo()"--> 
+        </form>
+        <div>
+            <button class="btn btn-success col-1 mt-2" type="button" onclick="Regresar()">Regresar al inicio</button>
+
+        </div>
+        <script>
+            function Regresar(){
+                window.location="main.html";
+                }
+        </script>
+        <script>
+            function codigo(){
+                    let codCMYK = document.getElementById("codCMYK").value;
+                    const condicion = /^C[0-9]{1,4}(|\/|\s){0,1}(M)[0-9]{1,4}(|\/|\s){0,1}(Y)[0-9]{1,4}(|\/|\s){0,1}(K)[0-9]{1,4}$/;
+                    alert(condicion.test(codCMYK));
+                    if(condicion.test(codCMYK)){
+                    localStorage.setItem('codCMYK',codCMYK);
+                    window.location="Resultados.html";
+                        }else{
+                            alert("El color ingresado no cumple con los parámetros establecidos");
+                        }            
+                    
+            
+            }
+        </script>
+    </body>
+</html>

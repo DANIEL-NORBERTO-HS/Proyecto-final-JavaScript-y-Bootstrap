@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JSON</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    </head>
+    <body>
+        <h1 class="text-center">Uso de Json</h1>
+        <h1 class="text-center">Convertir Objetos en Json</h1>
+<div class="container">
+    <form>
+        <div class="form-group mt-3">
+            <label for="txtId">ID</label>
+            <input type="text" class="form-control" id="txtID" placeholder="ingrese el id">
+        </div>
+        <div class="form-group mt-3">
+        <label for="txtNombre">Nombre</label>
+        <input type="text" class="form-control" id="txtNombre" placeholder="Ingrese el nombre">
+        </div>
+        <div class="form-group mt-3">
+        <label for="txtPais">Pais</label>
+        <input type="text" class="form-control" id="txtPais" placeholder="Ingrese el pais">
+        </div>
+        <button id="guardar" type="button" class="btn btn-success col-1 mt-2">Guardar</button>
+    </form>
+</div>
+    <div class="container mt-4">
+        <h2>Reo</h2>
+        <table class="table table-hover" id="TablaPresos">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>País</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+        <button class="btn btn-success col-1 mt-2" type="button" onclick="Regresar()">Regresar</button>
+        <button class="btn btn-success col-1 mt-2" type="button" onclick="borrar()">Borrar</button>
+        <button class="btn btn-success col-1 mt-2" type="button" onclick="ImprimirJSON()">Imprimir JSON</button>
+    </div>
+    </body>
+    <script>
+        //LISTA DE PresoS
+        let ListadePresos = [];
+
+        function añadirPresos_al_Sistema(_id, _nombre, _pais){
+            let newPreso = {
+                id : _id, nombre : _nombre, pais : _pais
+            };
+            console.log(newPreso);
+            ListadePresos.push(newPreso);
+            localStorageListadePresos(ListadePresos);
+        }
+        //Obtener la lista de los Presos y guardarla en el localstorage para que no se borre al actualizar.
+        function getListadePresos(){
+            let listaalmacenada = localStorage.getItem('LocalListadePresos');
+            if(listaalmacenada == null){
+                ListadePresos = [];
+            }else{
+                ListadePresos = JSON.parse(listaalmacenada);
+            }
+            return ListadePresos;
+        }
+        //Convertir la lista de los Presos en JSON
+        function localStorageListadePresos(_lista){
+            localStorage.setItem('LocalListadePresos', JSON.stringify(_lista));
+        }
+        //Imprimir JSON
+        function ImprimirJSON(){
+            let body = document.getElementsByTagName("body")[0];
+            let objetoJSON = document.createElement("h2");
+            objetoJSON.innerHTML=localStorage.getItem("LocalListadePresos");
+            body.appendChild(objetoJSON);
+        }
+        //guardar los valores de los Presos
+        document.querySelector('#guardar').addEventListener('click', guardarPresos);
+        imprimirTablaPresos();
+        function guardarPresos(){
+            id = document.querySelector('#txtID').value,
+            nombre = document.querySelector('#txtNombre').value,
+            pais = document.querySelector('#txtPais').value,
+           
+            
+            añadirPresos_al_Sistema(id,nombre,pais);
+            imprimirTablaPresos();
+        }
+        //Borrar los datos 
+        function borrar(){
+            if (localStorage)  {
+            localStorage.removeItem("LocalListadePresos");
+            window.location="jSon.html";
+            }
+        }
+        //Funcion para imprimir los datos de los Presos en la tabla
+        function imprimirTablaPresos(){
+            let lista = getListadePresos();
+           let tbody = document.querySelector('#TablaPresos tbody');
+            tbody.innerHTML = '';
+            for(let w = 0; w < lista.length; w++){
+                let fila = tbody.insertRow(w);
+                let idCelda = fila.insertCell(0);
+                let nombreCelda = fila.insertCell(1);
+                let paisCelda = fila.insertCell(2);
+                
+
+                idCelda.innerHTML = lista[w].id;
+                nombreCelda.innerHTML = lista[w].nombre;
+                paisCelda.innerHTML = lista[w].pais;
+
+
+                let inputSeleccionar = document.createElement('input');
+                inputSeleccionar.type = 'radio';
+                inputSeleccionar.value = lista[w].id;
+
+                tbody.appendChild(fila);
+            }
+        }
+
+
+        /*<-------------------------------------------------------------------------------------------------->*/
+        function Regresar(){
+            window.location="main.html";
+        }
+    </script>
+    
+</html>

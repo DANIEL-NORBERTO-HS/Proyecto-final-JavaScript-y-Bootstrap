@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Resultados</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='https://bootswatch.com/5/cyborg/bootstrap.min.css'>
+    <script src='main.js'></script>
+</head>
+<Center><body>
+    <h1>Validación de cadenas con expresiones regulares</h1>
+    <h2>10-ColorCMYK.</h2>
+    <h2>Nombre del alumno: Daniel Norberto Hernández Santiago</h2>
+    <h2>Grupo: I7U</h2>
+    <h2>N°ctrl: 18390015</h2>
+    <h2>Carrera: Ing. Sistema Computacionales</h2>
+    <h2>Desarrollo Web 1</h2>
+    <script>
+        let codigoCol = document.createElement("h1");
+        codigoCol.innerHTML = "El color CMYK ingresado es: " + localStorage.getItem("codCMYK");
+        let body = document.getElementsByTagName("body")[0];
+        body.appendChild(codigoCol);
+    </script>
+    <a href="validacion de datos.html"><button>Regresar</button></a>
+</body></Center>
+</html>
