@@ -1,7 +1,7 @@
 Autor: Daniel Norberto Hernández Santiago 
 Num. ctrl: 18390015 
 
-este proyecto aplica conocimientos de frnont end para el desarrollo del programa
+este proyecto aplica conocimientos de front end para el desarrollo del programa
 dado a que se utilizan muchas tareas(herramientas), para ello uso la herramienta de front end Webpack.
 
 //webpack: es un empaquetador de modulos. Esta herramienta resulta bastante util para no usar un preprocesador(sas, less,stylus,etc.)
